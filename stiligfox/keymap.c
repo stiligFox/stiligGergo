@@ -37,8 +37,6 @@ void oled_task_user(void) {
     oled_write_ln("NUM", led_usb_state & (1 << USB_LED_NUM_LOCK));
     oled_write(" ", false);
     oled_write("CAPS", led_usb_state & (1 << USB_LED_CAPS_LOCK));
-    oled_write(" ", false);
-    oled_write("SCRL", led_usb_state & (1 << USB_LED_SCROLL_LOCK));
     
     /* Show Mod  */
     uint8_t modifiers = get_mods() | get_oneshot_mods();
