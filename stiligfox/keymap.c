@@ -56,8 +56,8 @@ void oled_task_user(void) {
     oled_write("NumRw", IS_LAYER_ON(_NUM));
     oled_write("Utlty", IS_LAYER_ON(_UTIL));
     oled_write("NumPd", IS_LAYER_ON(_PAD));
-    oled_write("Game1"), IS_LAYER_ON(_GAME));
-    oled_write("Game2"), IS_LAYER_ON(_GAME2));
+    oled_write("Game1", IS_LAYER_ON(_GAME));
+    oled_write("Game2", IS_LAYER_ON(_GAME2));
 }
 
 #endif
