@@ -29,7 +29,7 @@ uint16_t log_timer       = 0;
 
 const char code_to_name[60] = {' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\', '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
 
-void render_status(void) {
+void oled_task_user(void) {
     /* Show Lock Status (only work on master side) */
     uint8_t led_usb_state = host_keyboard_leds();
     oled_write("Lock:", false);
@@ -52,25 +52,14 @@ void render_status(void) {
     oled_write(" ", false);
     oled_write_ln("GUI", (modifiers & MOD_MASK_GUI));
     
-    /* Show Activated layer */
+    /* Active layer */
+    
     oled_write("Layer", false);
-    switch (biton32(layer_state)) {
-        case _NUM:
-            oled_write("NumRw", false);
-            break;
-        case _UTIL:
-            oled_write("Utlty", false);
-            break;
-        case _PAD:
-            oled_write("NumPd", false);
-            break;
-        case _GAME:
-            oled_write("Game1", false);
-        case _GAME2:
-            oled_write("Game2", false);
-        default:
-            oled_write("Deflt", false);
-            break;
-    }
+    oled_write("NumRw", IS_LAYER_ON(_NUM));
+    oled_write("Utlty", IS_LAYER_ON(_UTIL));
+    oled_write("NumPd", IS_LAYER_ON(_PAD));
+    oled_write("Game1"), IS_LAYER_ON(_GAME));
+    oled_write("Game2"), IS_LAYER_ON(_GAME2));
 }
+
 #endif
