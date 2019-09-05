@@ -34,30 +34,39 @@ void oled_task_user(void) {
     uint8_t led_usb_state = host_keyboard_leds();
     oled_write("Lock:", false);
     oled_write(" ", false);
-    oled_write_ln("NUM", led_usb_state & (1 << USB_LED_NUM_LOCK));
-    oled_write(" ", false);
     oled_write("CAPS", led_usb_state & (1 << USB_LED_CAPS_LOCK));
+    oled_write(" ", false);
+    oled_write("SCRL", led_usb_state & (1 << USB_LED_SCROLL_LOCK));
+    oled_write(" ", false);
+    oled_write_ln("NUM", led_usb_state & (1 << USB_LED_NUM_LOCK));
     
     /* Show Mod  */
     uint8_t modifiers = get_mods() | get_oneshot_mods();
     oled_write("Mods:", false);
     oled_write(" ", false);
-    oled_write_ln("SFT", (modifiers & MOD_MASK_SHIFT));
+    oled_write_ln("Shft", (modifiers & MOD_MASK_SHIFT));
     oled_write(" ", false);
-    oled_write_ln("CTL", (modifiers & MOD_MASK_CTRL));
+    oled_write_ln("Cmnd", (modifiers & MOD_MASK_GUI));
     oled_write(" ", false);
-    oled_write_ln("ALT", (modifiers & MOD_MASK_ALT));
+    oled_write_ln("Ctrl", (modifiers & MOD_MASK_CTRL));
     oled_write(" ", false);
-    oled_write_ln("GUI", (modifiers & MOD_MASK_GUI));
+    oled_write_ln("Optn", (modifiers & MOD_MASK_ALT));
     
     /* Active layer */
-    
     oled_write("Layer", false);
-    oled_write("NumRw", IS_LAYER_ON(_NUM));
-    oled_write("Utlty", IS_LAYER_ON(_UTIL));
-    oled_write("NumPd", IS_LAYER_ON(_PAD));
-    oled_write("Game1", IS_LAYER_ON(_GAME));
-    oled_write("Game2", IS_LAYER_ON(_GAME2));
+    oled_write(" ", false);
+    oled_write("Dflt", IS_LAYER_ON(_QWERTY));
+    oled_write(" ", false);
+    oled_write("NmRw", IS_LAYER_ON(_NUM));
+    oled_write(" ", false);
+    oled_write("NmPd", IS_LAYER_ON(_PAD));
+    oled_write(" ", false);
+    oled_write("Util", IS_LAYER_ON(_UTIL));
+    oled_write(" ", false);
+    oled_write("Gm 1", IS_LAYER_ON(_GAME));
+    oled_write(" ", false);
+    oled_write("Gm 2", IS_LAYER_ON(_GAME2));
+    oled_write(" ", false);
 }
 
 #endif
